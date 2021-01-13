@@ -3,6 +3,9 @@
     <ion-title>
       Tab 1
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +16,11 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-button (click)="openMenu()" expand="block" fill="clear" shape="round">
+    open left Menu
+  </ion-button>
+  <ion-button (click)="toggleMenu()" expand="block" fill="clear" shape="round">
+    Toggle right menu
+  </ion-button>
   <app-explore-container name="Tab 1 page"></app-explore-container>
 </ion-content>

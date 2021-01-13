@@ -1,6 +1,6 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="push" side="end">
+    <ion-menu contentId="main-content" type="push" side="end" menuId="rightMenu">
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Mes plantes et moi</ion-list-header>
@@ -17,7 +17,20 @@
             <ion-label>La commu Insta</ion-label>
           </ion-item>
         </ion-list>
+      
+      </ion-content>
+    </ion-menu>
 
+    <ion-menu contentId="main-content" type="push" side="start" menuId="leftMenu">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header>Menu gauche</ion-list-header>
+          
+          <ion-item lines="none">
+            <ion-icon slot="start" name="logo-instagram" ></ion-icon>
+            <ion-label>La commu Insta</ion-label>
+          </ion-item>
+        </ion-list>
       
       </ion-content>
     </ion-menu>
