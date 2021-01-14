@@ -1,3 +1,4 @@
+import { PlantListItemComponent } from './../plants/plant-list-item/plant-list-item.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -14,8 +15,9 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page, PlantListItemComponent], 
 })
 export class Tab2PageModule {}
