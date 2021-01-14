@@ -1,11 +1,12 @@
-<ion-item [routerLink]="'/tabs/plants/'+ plant.id">
+<ion-item >
   <ion-thumbnail slot="start">
     <ion-img [src]="this.plant.photoUrl"></ion-img>
     
-  </ion-thumbnail>
-  <ion-label>
+  </ion-thumbnail >
+  <ion-label [routerLink]="'/tabs/plants/'+ plant.id">
     <h2>{{this.plant.name}}</h2>
     <p>{{this.plant.description}}</p>
   </ion-label>
- 
+  <ion-icon name="add-circle-outline" (click)="togglePlantToRegistered()"></ion-icon>
+  <ion-icon name="heart-circle-outline" (click)="togglePlantToFavorite()"></ion-icon>
 </ion-item>

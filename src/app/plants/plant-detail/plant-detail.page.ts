@@ -1,7 +1,8 @@
 import { ActivatedRoute } from "@angular/router";
-import { Plant, PlantsService } from "./../../services/plants.service";
+import { PlantsService } from "./../../services/plants.service";
 
 import { Component, OnInit } from "@angular/core";
+import { Plant } from "src/app/services/plant.model";
 
 @Component({
   selector: "app-plant-detail",
@@ -20,6 +21,7 @@ export class PlantDetailPage implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.params.subscribe((params) => {
+
       this.plant = this.plantDatabase.getPlantById(params.plantId);
     });
   }

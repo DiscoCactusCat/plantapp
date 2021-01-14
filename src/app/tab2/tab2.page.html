@@ -15,7 +15,20 @@
       <ion-title size="large">Encyclopédie</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-toolbar>
+    <ion-segment value="all">
+      <ion-segment-button value="all">
+        Voir toutes
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+         Favoris
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
+  <ion-button (click)="this.testUserPlantRegistered()" expand="block" fill="clear" shape="round">
+    Test registered
+  </ion-button>
   <ion-item-group>
     <plant-list-item *ngFor="let plant of this.getPlants()" [plant]="plant"></plant-list-item>
   </ion-item-group>
