@@ -12,7 +12,24 @@ export class PlantListItemComponent implements OnInit {
 
   constructor(private userPlants: UserPlantsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isRegistered = this.userPlants.isRegistered(this.plant.id);
+    this.isFavorite = this.userPlants.isFavorite(this.plant.id);
+
+    this.userPlants.registeredFullyRetrieved.subscribe( () => {
+      this.isRegistered = this.userPlants.isRegistered(this.plant.id);
+    });
+    this.userPlants.favoriteFullyRetrieved.subscribe( () => {
+      this.isFavorite = this.userPlants.isFavorite(this.plant.id);
+    });
+    this.userPlants.userPlantsUpdated.subscribe( () => {
+      this.isRegistered = this.userPlants.isRegistered(this.plant.id);
+      this.isFavorite = this.userPlants.isFavorite(this.plant.id);
+    });
+  }
+
+  public isRegistered: boolean;
+  public isFavorite: boolean;
 
   public togglePlantToRegistered() {
     this.userPlants.isRegistered(this.plant.id)

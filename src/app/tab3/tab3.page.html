@@ -10,11 +10,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Mes plantes</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <h1>Mes plantes</h1>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-card *ngFor="let plant of registeredPlants">
+    <ion-img [src]="plant.photoUrl"></ion-img>
+    <ion-card-header>
+      
+      <ion-card-title>{{plant.name}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

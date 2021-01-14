@@ -19,10 +19,7 @@ export class AppComponent implements OnInit, DoCheck{
     private router: RouterModule,
   ) {
     this.initializeApp();
-    // this.router.subscribe((url)=>{
-    //   console.log("Constructor check route", url);
-    //   this.currentRoute = url[0].path;
-    // });
+  
   }
 
   private currentRoute;
@@ -81,6 +78,5 @@ export class AppComponent implements OnInit, DoCheck{
 
   ngDoCheck(){
     this.checkSelected();
-    console.log("Current route :", this.currentRoute);
   }
 }

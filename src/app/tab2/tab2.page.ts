@@ -1,6 +1,7 @@
+import { Plant } from './../services/plant.model';
 import { UserPlantsService } from './../services/user-plants.service';
 
-import { PlantsService, Plant } from './../services/plants.service';
+import { PlantsService } from './../services/plants.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -19,11 +20,13 @@ export class Tab2Page implements OnInit{
   getPlants(): Plant[]{
     return this.plantsDatabase.getPlants();
   }
+
+  public clickedSearch(){
+    //TODO
+  }
   ngOnInit(){
     
   }
 
-  public testUserPlantRegistered(){
-    console.log(this.userPlants.isRegistered(10));
-  }
+  
 }

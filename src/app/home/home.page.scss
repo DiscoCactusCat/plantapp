@@ -1,0 +1,14 @@
+ion-title{
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+ion-card{
+    ion-img{
+        max-height: 50px;
+        img{
+            object-fit: cover;
+        }
+    }
+}

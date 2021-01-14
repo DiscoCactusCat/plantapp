@@ -1,4 +1,4 @@
-<ion-item >
+<ion-item [ngClass]="{'isFavorite': this.isFavorite}">
   <ion-thumbnail slot="start">
     <ion-img [src]="this.plant.photoUrl"></ion-img>
     
@@ -7,6 +7,6 @@
     <h2>{{this.plant.name}}</h2>
     <p>{{this.plant.description}}</p>
   </ion-label>
-  <ion-icon name="add-circle-outline" (click)="togglePlantToRegistered()"></ion-icon>
+  <ion-icon [attr.name]="this.isRegistered ? 'remove-circle-outline':'add-circle-outline'" (click)="togglePlantToRegistered()"></ion-icon>
   <ion-icon name="heart-circle-outline" (click)="togglePlantToFavorite()"></ion-icon>
 </ion-item>

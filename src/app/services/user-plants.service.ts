@@ -1,25 +1,24 @@
-import { PlantsService } from './plants.service';
+import { PlantsService } from "./plants.service";
 import { EventEmitter, Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { Plant } from "./plant.model";
+import { identifierModuleUrl } from "@angular/compiler";
 
 @Injectable({
   providedIn: "root",
 })
-export class UserPlantsService{
-  constructor(
-    private storage: Storage,
-    private plantsDatabase: PlantsService
-  ) {
+export class UserPlantsService {
+  constructor(private storage: Storage, private plantsDatabase: PlantsService) {
     this.retrieveRegisteredPlantsFromStorage();
     this.retrieveFavoritePlantsFromStorage();
-    console.log("Fin contsructor service User", this.registeredPlants);
   }
 
   private registeredPlants: number[] = [];
   private favoritePlants: number[] = [];
 
-  public storageFullyRetrieved = new EventEmitter();
+  public registeredFullyRetrieved = new EventEmitter();
+  public favoriteFullyRetrieved = new EventEmitter();
+  public userPlantsUpdated = new EventEmitter();
 
   // SERVICE FUNCTIONS
   // Registered Plants
@@ -27,9 +26,9 @@ export class UserPlantsService{
     return this.registeredPlants;
   }
 
-  public getRegisteredPlants(): Plant[]{
+  public getRegisteredPlants(): Plant[] {
     var plantsList = [];
-    this.getRegisteredPlantsId().forEach( id => {
+    this.getRegisteredPlantsId().forEach((id) => {
       plantsList.push(this.plantsDatabase.getPlantById(id));
     });
     return plantsList;
@@ -40,13 +39,11 @@ export class UserPlantsService{
       this.registeredPlants.push(plant.id);
       this.refreshStorage();
     }
-   
-    
   }
 
   public removePlantFromRegistered(plant: Plant) {
     if (this.isRegistered(plant.id)) {
-      this.registeredPlants.splice(plant.id, 1);    
+      this.registeredPlants = this.registeredPlants.filter((id) => id != plant.id);
       this.refreshStorage();
     }
   }
@@ -56,8 +53,6 @@ export class UserPlantsService{
       ? false
       : true;
   }
-
-  
 
   // Favorite Plants
   public getFavoritePlantsId(): number[] {
@@ -73,10 +68,9 @@ export class UserPlantsService{
 
   public removePlantFromFavorite(plant: Plant) {
     if (this.isFavorite(plant.id)) {
-      this.favoritePlants.splice(plant.id, 1);    
+      this.favoritePlants = this.favoritePlants.filter((id) => id != plant.id);
       this.refreshStorage();
     }
-    
   }
 
   public isFavorite(plantId: number) {
@@ -90,24 +84,19 @@ export class UserPlantsService{
   private async retrieveRegisteredPlantsFromStorage() {
     const data = await this.storage.get("userRegisteredPlants");
     this.registeredPlants = data ?? [];
-    this.storageFullyRetrieved.emit();
-    console.log("Plants registered in Storage", this.registeredPlants);
+    this.registeredFullyRetrieved.emit();
   }
-
-  // Storage retrieved event
 
   // Get back the user favorite plants list
   private async retrieveFavoritePlantsFromStorage() {
     const data = await this.storage.get("userFavoritePlants");
     this.favoritePlants = data ?? [];
+    this.favoriteFullyRetrieved.emit();
   }
 
   private refreshStorage() {
     this.storage.set("userRegisteredPlants", this.registeredPlants);
     this.storage.set("userFavoritePlants", this.favoritePlants);
+    this.userPlantsUpdated.emit();
   }
-
-  
-
-  
 }

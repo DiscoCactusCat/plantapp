@@ -1,30 +1,25 @@
-import { Plant } from './../services/plant.model';
-import { UserPlantsService } from './../services/user-plants.service';
-import { PlantsService } from './../services/plants.service';
-import { Component, OnInit } from '@angular/core';
+import { Plant } from "./../services/plant.model";
+import { UserPlantsService } from "./../services/user-plants.service";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: "app-home",
+  templateUrl: "./home.page.html",
+  styleUrls: ["./home.page.scss"],
 })
 export class HomePage implements OnInit {
-
-  constructor(private user: UserPlantsService) { 
-   
-  }
-
+  constructor(private user: UserPlantsService) {}
 
   public registeredPlants: Plant[] = [];
 
-  ngOnInit(){    
+  ngOnInit() {
+    this.registeredPlants = this.user.getRegisteredPlants();
+    this.user.registeredFullyRetrieved.subscribe(() => {
+      this.registeredPlants = this.user.getRegisteredPlants();
+    });
 
-    this.user.storageFullyRetrieved.subscribe(
-      () => {
-        console.log("Event fully retrieved déclenché");
-        this.registeredPlants = this.user.getRegisteredPlants();}
-    );
+    this.user.userPlantsUpdated.subscribe(() => {
+      this.registeredPlants = this.user.getRegisteredPlants();
+    });
   }
-
-  
 }
