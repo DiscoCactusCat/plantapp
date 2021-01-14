@@ -1,28 +1,38 @@
-import { Injectable, OnInit } from "@angular/core";
-import { AlertController } from "@ionic/angular";
+import { PlantsService } from './plants.service';
+import { EventEmitter, Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { Plant } from "./plant.model";
 
 @Injectable({
   providedIn: "root",
 })
-export class UserPlantsService implements OnInit {
+export class UserPlantsService{
   constructor(
-    private storage: Storage
-  ) {}
+    private storage: Storage,
+    private plantsDatabase: PlantsService
+  ) {
+    this.retrieveRegisteredPlantsFromStorage();
+    this.retrieveFavoritePlantsFromStorage();
+    console.log("Fin contsructor service User", this.registeredPlants);
+  }
 
   private registeredPlants: number[] = [];
   private favoritePlants: number[] = [];
 
-  ngOnInit(): void {
-    this.retrieveRegisteredPlantsFromStorage();
-    this.retrieveFavoritePlantsFromStorage();
-  }
+  public storageFullyRetrieved = new EventEmitter();
 
   // SERVICE FUNCTIONS
   // Registered Plants
   public getRegisteredPlantsId(): number[] {
     return this.registeredPlants;
+  }
+
+  public getRegisteredPlants(): Plant[]{
+    var plantsList = [];
+    this.getRegisteredPlantsId().forEach( id => {
+      plantsList.push(this.plantsDatabase.getPlantById(id));
+    });
+    return plantsList;
   }
 
   public addPlantToRegistered(plant: Plant) {
@@ -46,6 +56,8 @@ export class UserPlantsService implements OnInit {
       ? false
       : true;
   }
+
+  
 
   // Favorite Plants
   public getFavoritePlantsId(): number[] {
@@ -78,7 +90,11 @@ export class UserPlantsService implements OnInit {
   private async retrieveRegisteredPlantsFromStorage() {
     const data = await this.storage.get("userRegisteredPlants");
     this.registeredPlants = data ?? [];
+    this.storageFullyRetrieved.emit();
+    console.log("Plants registered in Storage", this.registeredPlants);
   }
+
+  // Storage retrieved event
 
   // Get back the user favorite plants list
   private async retrieveFavoritePlantsFromStorage() {
@@ -90,6 +106,8 @@ export class UserPlantsService implements OnInit {
     this.storage.set("userRegisteredPlants", this.registeredPlants);
     this.storage.set("userFavoritePlants", this.favoritePlants);
   }
+
+  
 
   
 }
