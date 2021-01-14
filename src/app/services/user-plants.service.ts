@@ -59,6 +59,14 @@ export class UserPlantsService {
     return this.favoritePlants;
   }
 
+  public getFavoritePlants(): Plant[]{
+    var plantsList = [];
+    this.getFavoritePlantsId().forEach((id) => {
+      plantsList.push(this.plantsDatabase.getPlantById(id));
+    });
+    return plantsList;
+  }
+
   public addPlantToFavorite(plant: Plant) {
     if (!this.isFavorite(plant.id)) {
       this.favoritePlants.push(plant.id);

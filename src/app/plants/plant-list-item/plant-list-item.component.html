@@ -1,12 +1,48 @@
-<ion-item [ngClass]="{'isFavorite': this.isFavorite}">
-  <ion-thumbnail slot="start">
-    <ion-img [src]="this.plant.photoUrl"></ion-img>
+<ion-item-sliding #slidingPlant [ngClass]="{'isFavorite': this.isFavorite}" (ionDrag)="managePlantOnDrag($event)">
+  
+  <!-- Left slide -->
+  <ion-item-options side="start" (click)="togglePlantToRegistered()"> 
+
+    <ng-container *ngIf="isRegistered ; else addRegistered">
+      <ion-item-option  color="danger" expandable>
+        <ion-icon slot="top" name="remove-circle-outline"></ion-icon> Mes plantes
+      </ion-item-option>
+    </ng-container>
+    <ng-template  #addRegistered>
+      <ion-item-option color="primary">
+        <ion-icon slot="top" name="add-circle-outline"></ion-icon> <br> Mes plantes
+      </ion-item-option>
+    </ng-template>    
     
+  </ion-item-options>  
+
+  <!-- Content -->
+ <ion-item>
+  <ion-thumbnail slot="start">
+    <ion-img [src]="this.plant.photoUrl"></ion-img>    
   </ion-thumbnail >
   <ion-label [routerLink]="'/tabs/plants/'+ plant.id">
     <h2>{{this.plant.name}}</h2>
     <p>{{this.plant.description}}</p>
   </ion-label>
-  <ion-icon [attr.name]="this.isRegistered ? 'remove-circle-outline':'add-circle-outline'" (click)="togglePlantToRegistered()"></ion-icon>
-  <ion-icon name="heart-circle-outline" (click)="togglePlantToFavorite()"></ion-icon>
-</ion-item>
+  <!-- <ion-icon *ngIf="!hideRegisterButton" [attr.name]="this.isRegistered ? 'remove-circle-outline':'add-circle-outline'" (click)="togglePlantToRegistered()"></ion-icon> -->
+  <ion-icon *ngIf="!hideFavoriteButton" name="heart-circle-outline" (click)="togglePlantToFavorite()"></ion-icon>
+  </ion-item>
+
+  <!-- Right slide -->
+  <ion-item-options side="end" (click)="togglePlantToFavorite()"> 
+    
+    <ng-container *ngIf="isFavorite ; else addFavorite">
+      <ion-item-option  color="danger" expandable>
+        <ion-icon slot="top" name="remove-circle-outline"></ion-icon> Mes favoris
+      </ion-item-option>
+    </ng-container>
+    <ng-template  #addFavorite>
+      <ion-item-option color="primary">
+        <ion-icon slot="top" name="add-circle-outline"></ion-icon> <br> Mes favoris
+      </ion-item-option>
+    </ng-template>    
+    
+  </ion-item-options>
+
+</ion-item-sliding>

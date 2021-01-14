@@ -24,18 +24,39 @@
       </ion-buttons>
       <ion-searchbar placeholder="Chercher une plante"></ion-searchbar>
     </ion-toolbar>
-    <ion-segment value="all">
+    <ion-segment  [(ngModel)]="this.chosenView" value="all">
       <ion-segment-button value="all">
         Voir toutes
       </ion-segment-button>
-      <ion-segment-button value="favorites">
-         Favoris
+      <ion-segment-button value="myplants">
+        Mes plantes
       </ion-segment-button>
+      <ion-segment-button value="favorites">
+        Favoris
+     </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
+  <div [ngSwitch]="this.chosenView" id="plant-book">
+    <ion-item-group *ngSwitchCase="'all'" >
+      <plant-list-item *ngFor="let plant of this.getPlants()" [plant]="plant" ></plant-list-item>
+    </ion-item-group>
+    <ion-item-group *ngSwitchCase="'myplants'">
+      <plant-list-item *ngFor="let plant of this.getUserRegisteredPlants()" [plant]="plant" [hideFavoriteButton]="true"></plant-list-item>
+      <div *ngIf="this.getUserRegisteredPlants().length === 0">
+        <p class="plant-book__default-message">Vous n'avez pas de plante enregistrée ! <br> Commencez à enregistrer vos plantes en cliquant sur l'icône <ion-icon name="add-circle-outline"></ion-icon> d'une plante ! </p>
+      </div>
+    </ion-item-group>
+    <ion-item-group  *ngSwitchCase="'favorites'">
+      <plant-list-item *ngFor="let plant of this.getUserFavoritePlants()" [plant]="plant" [hideRegisterButton]="true"></plant-list-item>
+      <div *ngIf="this.getUserFavoritePlants().length === 0">
+        <p class="plant-book__default-message">Vous n'avez pas de plante dans vos favoris ! <br> Commencez à ajouter des favoris en cliquant sur l'icône <ion-icon name="heart-circle-outline"></ion-icon> d'une plante ! </p>
+      </div>
+    </ion-item-group>
+    <ion-item-group  *ngSwitchDefault>
+      <plant-list-item *ngFor="let plant of this.getPlants()" [plant]="plant"></plant-list-item>
+    </ion-item-group>
+
+  </div>  
   
-  <ion-item-group>
-    <plant-list-item *ngFor="let plant of this.getPlants()" [plant]="plant"></plant-list-item>
-  </ion-item-group>
 </ion-content>

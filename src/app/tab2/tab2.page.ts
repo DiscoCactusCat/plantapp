@@ -17,8 +17,18 @@ export class Tab2Page implements OnInit{
     private plantsDatabase: PlantsService,
     private userPlants: UserPlantsService) {}
 
+  public chosenView: string = "all";
+
   getPlants(): Plant[]{
     return this.plantsDatabase.getPlants();
+  }
+
+  getUserFavoritePlants(): Plant[]{
+    return this.userPlants.getFavoritePlants();
+  }
+
+  getUserRegisteredPlants(): Plant[]{
+    return this.userPlants.getRegisteredPlants();
   }
 
   public clickedSearch(){

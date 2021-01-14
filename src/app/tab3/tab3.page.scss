@@ -1,4 +1,7 @@
 ion-card{
+    ion-card-header{
+        background: rgba(var(--ion-color-primary-contrast-rgb),.5);
+    }
     ion-img{
         max-height: 50px;
         img{
