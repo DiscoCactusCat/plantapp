@@ -44,13 +44,13 @@
     <ion-item-group *ngSwitchCase="'myplants'">
       <plant-list-item *ngFor="let plant of this.getUserRegisteredPlants()" [plant]="plant" [hideFavoriteButton]="true"></plant-list-item>
       <div *ngIf="this.getUserRegisteredPlants().length === 0">
-        <p class="plant-book__default-message">Vous n'avez pas de plante enregistrée ! <br> Commencez à enregistrer vos plantes en cliquant sur l'icône <ion-icon name="add-circle-outline"></ion-icon> d'une plante ! </p>
+        <p class="plant-book__default-message">Vous n'avez pas de plante enregistrée ! <br> Commencez à enregistrer vos plantes en swipant une plante vers la droite ! Puis cliquez sur le bouton d'ajout ;) 
       </div>
     </ion-item-group>
     <ion-item-group  *ngSwitchCase="'favorites'">
-      <plant-list-item *ngFor="let plant of this.getUserFavoritePlants()" [plant]="plant" [hideRegisterButton]="true"></plant-list-item>
+      <plant-list-item *ngFor="let plant of this.getUserFavoritePlants()" [plant]="plant"></plant-list-item>
       <div *ngIf="this.getUserFavoritePlants().length === 0">
-        <p class="plant-book__default-message">Vous n'avez pas de plante dans vos favoris ! <br> Commencez à ajouter des favoris en cliquant sur l'icône <ion-icon name="heart-circle-outline"></ion-icon> d'une plante ! </p>
+        <p class="plant-book__default-message">Vous n'avez pas de plante dans vos favoris ! <br> Commencez à ajouter des favoris en swipant une plante vers la gauche ! Puis cliquez sur le bouton d'ajout ;)  </p>
       </div>
     </ion-item-group>
     <ion-item-group  *ngSwitchDefault>

@@ -11,7 +11,6 @@ import { IonItemSliding } from '@ionic/angular';
 export class PlantListItemComponent implements OnInit {
   @Input() plant: Plant;
   @Input() hideFavoriteButton: false;
-  @Input() hideRegisterButton: false;
   @ViewChild(IonItemSliding) slidingItem: IonItemSliding;
 
   constructor(private userPlants: UserPlantsService) {}
@@ -31,12 +30,14 @@ export class PlantListItemComponent implements OnInit {
     this.userPlants.isRegistered(this.plant.id)
       ? this.userPlants.removePlantFromRegistered(this.plant)
       : this.userPlants.addPlantToRegistered(this.plant);
+      this.slidingItem.close();
   }
 
   public togglePlantToFavorite() {
     this.userPlants.isFavorite(this.plant.id)
       ? this.userPlants.removePlantFromFavorite(this.plant)
       : this.userPlants.addPlantToFavorite(this.plant);
+      this.slidingItem.close();
   }
 
   public managePlantOnDrag(event: any){

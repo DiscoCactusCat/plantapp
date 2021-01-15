@@ -4,6 +4,15 @@
     }
 }
 
+.isRegistered{
+    ion-thumbnail:before{
+        content: '';
+        height: 100%;
+        width: 20px;
+        background-color: var(--ion-color-primary);
+    }
+}
+
 ion-item-option{
     ion-icon{
         height: 20px;

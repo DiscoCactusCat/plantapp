@@ -1,4 +1,4 @@
-<ion-item-sliding #slidingPlant [ngClass]="{'isFavorite': this.isFavorite}" (ionDrag)="managePlantOnDrag($event)">
+<ion-item-sliding #slidingPlant [ngClass]="{'isFavorite': this.isFavorite, 'isRegistered': this.isRegistered}" (ionDrag)="managePlantOnDrag($event)">
   
   <!-- Left slide -->
   <ion-item-options side="start" (click)="togglePlantToRegistered()"> 
@@ -17,21 +17,21 @@
   </ion-item-options>  
 
   <!-- Content -->
- <ion-item>
+ <ion-item [routerLink]="'/tabs/plants/'+ plant.id">
   <ion-thumbnail slot="start">
     <ion-img [src]="this.plant.photoUrl"></ion-img>    
   </ion-thumbnail >
-  <ion-label [routerLink]="'/tabs/plants/'+ plant.id">
+  <ion-label >
     <h2>{{this.plant.name}}</h2>
     <p>{{this.plant.description}}</p>
   </ion-label>
-  <!-- <ion-icon *ngIf="!hideRegisterButton" [attr.name]="this.isRegistered ? 'remove-circle-outline':'add-circle-outline'" (click)="togglePlantToRegistered()"></ion-icon> -->
-  <ion-icon *ngIf="!hideFavoriteButton" name="heart-circle-outline" (click)="togglePlantToFavorite()"></ion-icon>
+  
+  <ion-icon *ngIf="!hideFavoriteButton" name="heart-circle-outline"></ion-icon>
   </ion-item>
 
   <!-- Right slide -->
   <ion-item-options side="end" (click)="togglePlantToFavorite()"> 
-    
+
     <ng-container *ngIf="isFavorite ; else addFavorite">
       <ion-item-option  color="danger" expandable>
         <ion-icon slot="top" name="remove-circle-outline"></ion-icon> Mes favoris
