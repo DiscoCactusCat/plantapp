@@ -43,14 +43,7 @@ export class PlantListItemComponent implements OnInit {
   public managePlantOnDrag(event: any){
     
     event.target.getSlidingRatio().then(slidingRatio => {
-      console.log(slidingRatio);
-      if(slidingRatio > .5){        
-       
-      }else if(slidingRatio < -0.5){
-        
-      }else if(Math.abs(slidingRatio)==1){
-        this.slidingItem.close();
-      }
+     
   });
     
   }
