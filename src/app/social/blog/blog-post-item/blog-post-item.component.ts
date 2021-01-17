@@ -22,8 +22,7 @@ export class BlogPostItemComponent implements OnInit {
   }
 
   public getPostImage(){
-    console.log("Post index", this.postIndex);
-    console.log("Img url for card", this.postService.getPostImage(this.postIndex));
+    
     return this.postService.getPostImage(this.postIndex);
   }
 

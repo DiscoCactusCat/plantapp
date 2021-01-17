@@ -25,9 +25,4 @@ export class HomePage implements OnInit {
 
     
   }
-
-  ionViewWillEnter(){
-    console.log("Hello home");
-   
-  }
 }
