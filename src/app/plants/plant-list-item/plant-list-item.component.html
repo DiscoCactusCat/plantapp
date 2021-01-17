@@ -10,7 +10,7 @@
     </ng-container>
     <ng-template  #addRegistered>
       <ion-item-option color="primary">
-        <ion-icon slot="top" name="add-circle-outline"></ion-icon> <br> Mes plantes
+        <ion-icon slot="top" name="add-circle-outline"></ion-icon>  Mes plantes
       </ion-item-option>
     </ng-template>    
     
@@ -31,7 +31,7 @@
 
   <!-- Right slide -->
   <ion-item-options side="end" (click)="togglePlantToFavorite()"> 
-
+    
     <ng-container *ngIf="isFavorite ; else addFavorite">
       <ion-item-option  color="danger" expandable>
         <ion-icon slot="top" name="remove-circle-outline"></ion-icon> Mes favoris
@@ -39,7 +39,7 @@
     </ng-container>
     <ng-template  #addFavorite>
       <ion-item-option color="primary">
-        <ion-icon slot="top" name="add-circle-outline"></ion-icon> <br> Mes favoris
+        <ion-icon slot="top" name="add-circle-outline"></ion-icon>  Mes favoris
       </ion-item-option>
     </ng-template>    
     

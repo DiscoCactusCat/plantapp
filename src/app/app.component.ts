@@ -37,25 +37,31 @@ export class AppComponent implements OnInit, DoCheck{
     },
     {
       title: 'Encyclopédie des plantes',
-      url: '/tabs/tab2',
+      url: '/tabs/plants',
       icon: 'book'
     },
     {
       title: 'Mes plantes',
       url: '/tabs/tab3',
       icon: 'leaf'
-    },
-    // {
-    //   title: 'Cimetière des plantes',
-    //   url: '',
-    //   icon: 'skull'
-    // },
-    // {
-    //   title: 'Mon profil',
-    //   url: '',
-    //   icon: 'person-circle'
-    // },
+    },  
+    
+    
 
+
+  ];
+
+  public socialPages = [
+    {
+      title: 'Blog',
+      url: 'blog',
+      icon: 'pencil'
+    },
+    {
+      title: 'Mon profil',
+      url: '',
+      icon: 'person-circle'
+    },
   ];
 
   initializeApp() {

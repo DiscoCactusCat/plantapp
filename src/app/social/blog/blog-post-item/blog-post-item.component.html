@@ -1,0 +1,15 @@
+
+<ion-col size="6">
+  <ion-card>
+    
+    <ion-img [src]="getPostImage()"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>Publié le : {{getPostDate()}} à {{getPostTime()}}</ion-card-subtitle>
+      <ion-card-title [innerHTML]="post.title.rendered"></ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content [innerHTML]="post.excerpt.rendered">
+   
+    </ion-card-content>
+  </ion-card>
+</ion-col>

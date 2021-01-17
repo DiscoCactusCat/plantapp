@@ -8,6 +8,26 @@
 </ion-header>
 
 <ion-content>
+
+  <div class="dropplets no-filter">
+    <div class="dropplet"></div>
+    <div class="dropplet"></div>
+    <div class="dropplet"></div>
+    <div class="dropplet"></div>
+    <div class="dropplet"></div>
+    <div class="dropplet"></div>
+    <div class="dropplet"></div>
+    <div class="dropplet"></div>
+  </div>
+  <svg width="0" height="0">
+  
+    <filter id="water">    
+      
+      <feDiffuseLighting in='noise' lighting-color='green' surfaceScale='4' result="texture"/>
+      <feComposite in="texture" in2="SourceGraphic" operator="in" />
+    </filter>
+  </svg>
+
   <h1>Mes plantes</h1>
 
   <ion-card *ngFor="let plant of registeredPlants">

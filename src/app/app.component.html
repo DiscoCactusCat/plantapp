@@ -6,16 +6,30 @@
           <ion-list-header>Mes plantes et moi</ion-list-header>
           <ion-note>Qu'est-ce qu'on est bien</ion-note>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
+          <ion-menu-toggle auto-hide="false">
+            
+            <ion-item-group>
+              <ion-item-divider>
+                <ion-label>Plantes</ion-label>
+              </ion-item-divider>
+              <ion-item  *ngFor="let p of appPages; let i = index" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-item-group>
+            <ion-item-group>
+              <ion-item-divider>
+                <ion-label>Communauté</ion-label>
+              </ion-item-divider>
+              <ion-item  *ngFor="let p of socialPages; let i = index" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-item-group>
+           
+            
           </ion-menu-toggle>
-          <ion-item lines="none">
-            <ion-icon slot="start" name="logo-instagram" ></ion-icon>
-            <ion-label>La commu Insta</ion-label>
-          </ion-item>
+         
         </ion-list>
       
       </ion-content>

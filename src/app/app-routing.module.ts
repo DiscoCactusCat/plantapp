@@ -6,6 +6,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
+  {
+    path: 'blog',
+    loadChildren: () => import('./social/blog/blog.module').then( m => m.BlogPageModule)
+  },
   
   
 ];

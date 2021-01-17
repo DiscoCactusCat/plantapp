@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Blog</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <app-blog-post-item *ngFor="let post of blogPosts; let postIndex=index" [postIndex]="postIndex" [post]="post"></app-blog-post-item>
+</ion-content>
