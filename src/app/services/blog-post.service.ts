@@ -9,25 +9,25 @@ export class BlogPostService {
     this.getWpPosts();
   }
 
-  private wpPosts: {};
-  private thumbsImg = {};
+  private wpPosts: Object[] = [];
+  private wpImages = [];
 
   private getWpPosts() {
-    this.thumbsImg = [];
     this.http
       .get("https://www.quandarrosermaplante.com/wp-json/wp/v2/posts")
       .subscribe((data) => {
-        this.wpPosts = data;
-        Object.keys(data).forEach((post) => {
+        for (var i in data) {
+          this.wpPosts.push(data[i]);
+
           this.http
             .get(
-              "https://www.quandarrosermaplante.com/wp-json/wp/v2/media?id=" +
-                data[post].featured_media
+              "https://www.quandarrosermaplante.com/wp-json/wp/v2/media/" +
+                data[i].featured_media
             )
-            .subscribe((img) => {
-              this.thumbsImg = img;
+            .subscribe((imgSource) => {
+              this.wpImages.push(imgSource);
             });
-        });
+        }
       });
   }
 
@@ -35,8 +35,10 @@ export class BlogPostService {
     return this.wpPosts;
   }
 
-  public getPostImage(postIndex: number) {
-    return this.thumbsImg[postIndex].source_url;
+  public getPostImage(postId: number) {
+    var post: any = this.wpPosts.filter((post: any) => post.id == postId)[0];
+    var img = this.wpImages.filter((img) => img.id == post.featured_media)[0];
+    return img.source_url;
   }
 
   public toFrenchDate(wpPostDate: string): Array<string> {

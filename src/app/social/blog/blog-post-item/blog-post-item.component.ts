@@ -10,7 +10,7 @@ export class BlogPostItemComponent implements OnInit {
 
   constructor(private postService: BlogPostService) { }
 
-  @Input() post: Object;
+  @Input() post: any;
   @Input() postIndex: number;
   ngOnInit() {}
 
@@ -21,9 +21,8 @@ export class BlogPostItemComponent implements OnInit {
     return (this.postService.toFrenchDate(this.post.modified))[1];
   }
 
-  public getPostImage(){
-    
-    return this.postService.getPostImage(this.postIndex);
+  public getPostImage(){    
+    return this.postService.getPostImage(this.post.id);
   }
 
 }
